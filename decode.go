@@ -271,6 +271,9 @@ func (md *MetaData) unifyStruct(mapping interface{}, rv reflect.Value) error {
 				return e("cannot write unexported field %s.%s",
 					rv.Type().String(), f.name)
 			}
+		} else {
+			// I think here we couldn't find a match for key
+			return fmt.Errorf(fmt.Sprintf("unmatched toml setting: %s", key))
 		}
 	}
 	return nil
